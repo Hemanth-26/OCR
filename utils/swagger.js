@@ -19,6 +19,13 @@ const options = {
         description: 'Local server'
       },
     ],
+    components: {
+      examples: {
+        pdfFile: {
+          value: `http://localhost:${PORT}/sample-table.pdf`,
+        },
+      },
+    },
   },
   apis: ['./routers/ocrRouter.js'],
 };
