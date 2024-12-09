@@ -1,12 +1,19 @@
 const OcrRouter = require("express").Router();
-const { ImageToText, ExtractText } = require("../controllers/ocrController");
+const { ImageToText, } = require("../controllers/ocrController");
 
 /**
  * @swagger
  * /ocr/image-to-text:
  *   post:
- *     summary: Converts image to text using Azure OCR API
- *     description: Upload an image file and get the extracted text as a sentence using Azure's OCR service. Includes detailed breakdown.
+ *     summary: Converts an image or PDF to text using Azure OCR API
+ *     description: >
+ *       Upload an image or PDF file to extract text using Azure's OCR service. 
+ *       Features: 
+ *       - Handwriting recognition: Supports handwritten text in images.
+ *       - Multi-language support: Automatically detects and extracts text in supported languages.
+ *       Supported file formats: 
+ *       - Images: JPEG, PNG, BMP, TIFF
+ *       - PDFs: Text or image-based PDF files.
  *     requestBody:
  *       required: true
  *       content:
@@ -17,10 +24,13 @@ const { ImageToText, ExtractText } = require("../controllers/ocrController");
  *               processFile:
  *                 type: string
  *                 format: binary
- *                 description: The image file to be processed for OCR
+ *                 description: >
+ *                   The image or PDF file to be processed for OCR. 
+ *                   Supported formats: JPEG, PNG, BMP, TIFF, PDF.
+ *                   Supports handwritten text and multi-language extraction.
  *     responses:
  *       200:
- *         description: OCR result from Azure, converted into a single sentence with detailed data
+ *         description: Successfully extracted text from the uploaded image or PDF.
  *         content:
  *           application/json:
  *             schema:
@@ -31,25 +41,32 @@ const { ImageToText, ExtractText } = require("../controllers/ocrController");
  *                   example: success
  *                 extractedText:
  *                   type: string
- *                   description: The extracted text as a sentence
- *                   example: "Hello world This is OCR"
+ *                   description: The full extracted text.
+ *                   example: "Hola mundo. This is OCR."
  *                 detailedData:
  *                   type: array
+ *                   description: Detailed breakdown of extracted text by page and line.
  *                   items:
  *                     type: object
  *                     properties:
- *                       region:
+ *                       page:
  *                         type: integer
- *                         description: Region number
+ *                         description: Page number of the text.
+ *                         example: 1
  *                       line:
  *                         type: integer
- *                         description: Line number within the region
+ *                         description: Line number on the page.
+ *                         example: 1
  *                       text:
  *                         type: string
- *                         description: Text of the line
- *                         example: "Hello world"
+ *                         description: The text of the line.
+ *                         example: "Hola mundo"
  *       400:
- *         description: Bad request, no file uploaded, file format error, or no text could be extracted from the uploaded image
+ *         description: >
+ *           Bad request. Possible reasons: 
+ *           - No file uploaded 
+ *           - Unsupported file format 
+ *           - No text could be extracted from the uploaded file.
  *         content:
  *           application/json:
  *             schema:
@@ -57,9 +74,9 @@ const { ImageToText, ExtractText } = require("../controllers/ocrController");
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "The uploaded file could not extract or process any data."
+ *                   example: "No file was uploaded or file format is not supported."
  *       500:
- *         description: Internal server error, possibly related to Azure OCR API
+ *         description: Internal server error, possibly related to Azure OCR API.
  *         content:
  *           application/json:
  *             schema:
@@ -67,12 +84,9 @@ const { ImageToText, ExtractText } = require("../controllers/ocrController");
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Error calling Azure OCR API."
+ *                   example: "Error occurred while processing the file with Azure OCR API."
  */
 
 OcrRouter.post("/image-to-text", ImageToText);
-
-
-// OcrRouter.post("/extract-text", ExtractText);
 
 module.exports = OcrRouter;
