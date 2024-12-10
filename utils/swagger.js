@@ -2,7 +2,8 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 
 require('dotenv').config();
-const PORT = process.env.PORT;
+const port = process.env.PORT || 4000;
+const appUrl = process.env.APP_URL || `http://localhost:${port}`;
 
 // Define Swagger options
 const options = {
@@ -19,7 +20,7 @@ const options = {
         description: 'Live server'
       },
       {
-        url: `http://localhost:4000`,
+        url: `http://localhost:${port}`,
         description: 'Local server'
       },
     ],
