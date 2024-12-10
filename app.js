@@ -14,7 +14,8 @@ dotenv.config();
 const OcrRouter = require('./routers/ocrRouter');
 
 /**Local Variables */
-const PORT = process.env.PORT;
+const port = process.env.PORT || 4000;
+const appUrl = process.env.APP_URL || `http://localhost:${port}`;
 
 /**Middleware */
 app.use(cors());
@@ -49,9 +50,11 @@ app.get("/", (req, res) => {
     res.status(200).send("Server Running Successfully");
 });
 
-const server = app.listen(PORT, () => {
-    console.log(`Server listening on http://localhost:${PORT}`);
-    console.log(`Swagger Documentation at http://localhost:${PORT}/api-docs`);
+
+console.log(appUrl);
+const server = app.listen(port, () => {
+    console.log(`Server listening on ${appUrl}`);
+    console.log(`Swagger Documentation at ${appUrl}/api-docs`);
 });
 
 server.on('error', (err) => {

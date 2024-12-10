@@ -21,12 +21,12 @@ const { ImageToText, TabletoJson } = require("../controllers/ocrController");
  * 
  *       <div style="text-align: left; margin-bottom: 20px;">
  *         <div style="display: flex; justify-content: flex-start; gap: 10px;">
- *           <img src="http://localhost:4000/images/sample-image-1.jpg" width="200px" height="200px" />
- *           <img src="http://localhost:4000/images/sample-image-2.jpg" width="200px" height="200px" />
- *           <img src="http://localhost:4000/images/handwrite.jpg" width="200px" height="200px" />
+ *           <img src="http://137.184.77.186:4000/images/sample-image-1.jpg" width="200px" height="200px" />
+ *           <img src="http://137.184.77.186:4000/images/sample-image-2.jpg" width="200px" height="200px" />
+ *           <img src="http://137.184.77.186:4000/images/handwrite.jpg" width="200px" height="200px" />
  *         </div>
  *         <br><br>
- *         <a href="http://localhost:4000/sample.pdf" target="_blank">View Example PDF</a>
+ *         <a href="http://137.184.77.186:4000/sample.pdf" target="_blank">View Example PDF</a>
  *         <br><br>
  *       </div>
  *       

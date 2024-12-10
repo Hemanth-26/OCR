@@ -15,14 +15,18 @@ const options = {
     },
     servers: [
       {
-        url: `http://localhost:${PORT}`,
+        url: process.env.APP_URL,
+        description: 'Live server'
+      },
+      {
+        url: `http://localhost:4000`,
         description: 'Local server'
       },
     ],
     components: {
       examples: {
         pdfFile: {
-          value: `http://localhost:${PORT}/sample-table.pdf`,
+          value: `${process.env.APP_URL}/sample-table.pdf`,
         },
       },
     },
